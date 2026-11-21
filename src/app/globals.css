@@ -1,0 +1,277 @@
+@import "tailwindcss";
+
+/*
+ * DocusAI design tokens (FacServis family: dark brand panel + two-tone wordmark, own color).
+ * Restrained strategy: warm-neutral ground, one brand color,
+ * semantic colors only where they carry meaning. Elevation: borders for surfaces,
+ * shadow only for floating layers (menus, dialogs, toasts).
+ */
+:root {
+  --canvas: #fafaf9;
+  --surface: #ffffff;
+  --sunken: #f5f5f3;
+  --hover: #f1f1ee;
+  --line: #e7e6e2;
+  --line-strong: #d4d3ce;
+
+  --ink: #131417;
+  --ink-2: #4f525a;
+  --ink-3: #6e7178;
+  --ink-inverse: #ffffff;
+
+  /* Brand palette: violeta. Panel = sign-in side panel; accent = "AI" in the wordmark. */
+  --panel-from: #150e38;
+  --panel-to: #281a66;
+  --panel-accent: #b9a6ff;
+  --panel-muted: #dcd3ff;
+  --brand: #5b3df5;
+  --brand-hover: #4a2fe0;
+  --brand-soft: #f1edff;
+  --brand-line: #d9cffd;
+
+  --ok: #157f3c;
+  --ok-soft: #e9f7ee;
+  --ok-line: #bfe5cc;
+  --warn: #9a5b00;
+  --warn-soft: #fff5e0;
+  --warn-line: #f5d999;
+  --bad: #b8322a;
+  --bad-soft: #fdeeed;
+  --bad-line: #f4c5c1;
+  --info: #4f525a;
+  --info-soft: #f1f1ee;
+
+  --mark: #fff2a8; /* evidence highlight in the document */
+  --mark-strong: #ffd84d;
+
+  --shadow-pop: 0 8px 24px -6px rgb(19 20 23 / 0.14), 0 2px 6px -2px rgb(19 20 23 / 0.08);
+  --shadow-press: 0 1px 2px rgb(19 20 23 / 0.06);
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-hover: var(--hover);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-ink-inverse: var(--ink-inverse);
+  --color-panel-from: var(--panel-from);
+  --color-panel-to: var(--panel-to);
+  --color-panel-accent: var(--panel-accent);
+  --color-panel-muted: var(--panel-muted);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-line: var(--brand-line);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-ok-line: var(--ok-line);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-warn-line: var(--warn-line);
+  --color-bad: var(--bad);
+  --color-bad-soft: var(--bad-soft);
+  --color-bad-line: var(--bad-line);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-mark: var(--mark);
+  --color-mark-strong: var(--mark-strong);
+
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-face), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+
+  --shadow-pop: var(--shadow-pop);
+  --shadow-press: var(--shadow-press);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+::selection {
+  background: var(--brand-line);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+/* Text fields draw their own focus ring (border + soft halo); no second outline. */
+input:not([type="checkbox"]):not([type="radio"]):focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+}
+
+/* Checkboxes in the product's own style */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background: var(--surface) center / 11px 11px no-repeat;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: background-color 120ms, border-color 120ms, box-shadow 120ms;
+}
+input[type="checkbox"]:hover {
+  border-color: var(--ink-3);
+}
+input[type="checkbox"]:checked {
+  background-color: var(--ink);
+  border-color: var(--ink);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='m2.5 6.2 2.3 2.3 4.7-5' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+input[type="checkbox"]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(58 71 213 / 0.2);
+  border-color: var(--brand);
+}
+input[type="checkbox"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Selects: same chevron as the rest of the UI instead of the OS one */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m4.5 6.5 3.5 3.5 3.5-3.5' fill='none' stroke='%236e7178' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  background-size: 16px 16px;
+  padding-right: 26px !important;
+  cursor: pointer;
+}
+
+/* Native date picker: quiet icon, muted placeholder */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0.45;
+  cursor: pointer;
+}
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 0.8;
+}
+input[type="date"]:invalid,
+input[type="date"][value=""] {
+  color: var(--ink-3);
+}
+
+input,
+textarea,
+select {
+  caret-color: var(--brand);
+}
+
+a {
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Quiet scrollbars that belong to the palette */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+/* PDF text layer: evidence highlight */
+/* Highlighter, not paint: the canvas text underneath must stay readable. */
+.react-pdf__Page__textContent mark.lf-evidence {
+  color: transparent;
+  background: rgb(255 214 0 / 0.42);
+  mix-blend-mode: multiply;
+  border-radius: 2px;
+  padding: 1px 2px;
+  margin: -1px -2px;
+}
+.react-pdf__Page__textContent mark.lf-evidence.is-active {
+  background: rgb(255 200 0 / 0.55);
+  box-shadow: 0 0 0 1.5px rgb(224 168 0 / 0.9);
+}
+
+@keyframes lf-tick {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes lf-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes lf-shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+.lf-skeleton {
+  background: linear-gradient(90deg, var(--sunken) 0%, var(--hover) 50%, var(--sunken) 100%);
+  background-size: 200% 100%;
+  animation: lf-shimmer 1.6s linear infinite;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
