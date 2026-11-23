@@ -77,12 +77,12 @@ export default function Landing() {
             <a href="#demo" className="group inline-flex h-12 items-center gap-2 rounded-full bg-panel-accent px-6 text-[15px] font-semibold text-panel-from transition-colors hover:bg-white">
               Solicitar demo <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
             </a>
-            <a href="#demo" className="inline-flex h-12 items-center rounded-full border border-white/25 px-6 text-[15px] font-semibold text-white transition-colors hover:border-white">
-              Probar gratis 14 días
+            <a href="#como-funciona" className="inline-flex h-12 items-center rounded-full border border-white/25 px-6 text-[15px] font-semibold text-white transition-colors hover:border-white">
+              Cómo funciona
             </a>
           </div>
           <ul className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-[14px] text-white/70">
-            {['Sin plantillas por proveedor', 'Datos en la UE', 'Sin tarjeta'].map((t) => (
+            {['Sin plantillas por proveedor', 'Datos en la UE', 'Demo con tus facturas'].map((t) => (
               <li key={t} className="flex items-center gap-1.5">
                 <Check className="size-4 text-panel-accent" /> {t}
               </li>
@@ -92,7 +92,7 @@ export default function Landing() {
       </section>
       <div className="relative mx-auto -mt-32 max-w-[1160px] px-4 sm:px-6">
         <ProductDemo />
-        <p className="mt-3 text-center text-xs text-ink-3">Pasa el ratón por los campos: cada valor se señala en el documento del que sale.</p>
+        <p className="mt-3 text-center text-xs text-ink-3">Cada valor se señala en el documento del que sale. Pasa el ratón o toca un campo.</p>
       </div>
 
       {/* How it works: four stops, one line each */}
@@ -194,16 +194,16 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Demo: violet band with the form */}
+      {/* Demo: violet band with the booking calendar inline, so "Solicitar demo" lands on something to do */}
       <section id="demo" className="scroll-mt-16 text-white" style={PANEL}>
-        <div className="mx-auto grid max-w-[1160px] gap-12 px-4 py-24 sm:px-6 lg:grid-cols-[1fr_1.1fr] lg:items-center">
-          <div>
-            <h2 className="max-w-[14ch] font-display text-[clamp(34px,4.6vw,58px)] font-extrabold leading-[1.0] tracking-[-0.035em]">
-              Pruébalo con tus <span className="text-panel-accent">propias facturas.</span>
-            </h2>
-            <p className="mt-5 max-w-[40ch] text-[18px] leading-relaxed text-panel-muted">20 minutos con un lote real: ves cuántas pasan sin tocar.</p>
+        <div className="mx-auto max-w-[1160px] px-4 py-24 sm:px-6">
+          <h2 className="max-w-[18ch] font-display text-[clamp(34px,4.6vw,58px)] font-extrabold leading-[1.0] tracking-[-0.035em]">
+            Pruébalo con tus <span className="text-panel-accent">propias facturas.</span>
+          </h2>
+          <p className="mt-5 max-w-[48ch] text-[18px] leading-relaxed text-panel-muted">30 minutos con un lote real: ves cuántas pasan sin tocar. Elige día y hora.</p>
+          <div className="mt-10">
+            <DemoContact />
           </div>
-          <DemoContact />
         </div>
       </section>
 
