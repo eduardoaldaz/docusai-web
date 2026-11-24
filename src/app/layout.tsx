@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import { Bricolage_Grotesque, Figtree, JetBrains_Mono } from 'next/font/google';
 import { BRAND, SITE } from '@/lib/brand';
 import './globals.css';
@@ -24,7 +25,17 @@ export const viewport: Viewport = { themeColor: '#150e38' };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={`${figtree.variable} ${bricolage.variable} ${mono.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        {/* Cloudflare Web Analytics: cookieless, aggregate visit stats. Public beacon token. */}
+        {process.env.NODE_ENV === 'production' && (
+          <Script
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            strategy="afterInteractive"
+            data-cf-beacon={JSON.stringify({ token: '7d29efa941ad4cbd88f4613bd44bf50c' })}
+          />
+        )}
+      </body>
     </html>
   );
 }
